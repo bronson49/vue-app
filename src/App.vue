@@ -1,18 +1,52 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <h1>{{getTest}}</h1>
+
+     <div class="wrapper">
+        <app-sidebar @changeTab="changeTab"></app-sidebar>
+
+        <keep-alive>
+        <component v-bind:is="currentTab"></component>
+        </keep-alive>
+
+     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+   import sidebar from './components/sidebar'
+   import search from './components/search'
+   import watch from './components/watch'
+   import favorite from './components/favorite'
+   import viewed from './components/viewed'
 
 export default {
   name: 'app',
+    data(){
+        return{
+            currentTab : 'app-search',
+        }
+    },
+    beforeMount(){
+        this.$store.dispatch('getToWatch');
+    },
   components: {
-    HelloWorld
-  }
+      appSidebar:sidebar,
+      appSearch: search,
+      appWatch: watch,
+      appFavorite: favorite,
+      appViewed: viewed,
+  },
+  computed : {
+    getTest(){
+       return this.$store.state.test
+    }
+  },
+    methods: {
+      changeTab (tab){
+          this.currentTab = tab;
+      },
+    },
 }
 </script>
 
@@ -21,7 +55,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }

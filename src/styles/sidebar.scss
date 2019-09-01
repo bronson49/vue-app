@@ -1,0 +1,16 @@
+.sidebar-wrapper{
+  width: 20%;
+  border-right: 1px solid slategrey;
+  padding: 20px;
+}
+.sidebar-wrapper > div {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid slategrey;
+  background: white;
+  cursor: pointer;
+  transition: .3s;
+}
+.sidebar-wrapper > div:hover{
+  background: aliceblue;
+}
