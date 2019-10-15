@@ -1,17 +1,25 @@
 @import "search";
 @import "sidebar";
 @import "watch_list";
-body {
-  background: #b4b4b4;
-}
 
+*{box-sizing: border-box}
+body {
+  background: #2e2e2e;
+  color: white;
+}
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 60px;
+}
 .wrapper{
   display: flex;
   max-width: 1000px;
   margin: 0 auto;
 }
 .tab-wrapper{
-  width: 80%;
+  width: 100%;
 }
 .tab-wrapper h1 {
   text-align: center;

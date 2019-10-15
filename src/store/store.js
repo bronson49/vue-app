@@ -8,6 +8,8 @@ const store = new Vuex.Store({
     state:{
         test : 'my films',
         watchList:[],
+        activeTabIndex: 0,
+        rotateStep:15,
     },
     getters:{
 
@@ -18,6 +20,9 @@ const store = new Vuex.Store({
         },
         generateWatchList(state, filmArr){
             state.watchList = filmArr;
+        },
+        rotateTabList(state, index){
+            state.activeTabIndex = index;
         },
     },
     actions:{
