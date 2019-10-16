@@ -5,9 +5,12 @@
      <div class="wrapper">
         <app-sidebar @changeTab="changeTab"></app-sidebar>
 
-        <keep-alive>
-        <component v-bind:is="currentTab"></component>
-        </keep-alive>
+        <transition name="component-fade" mode="out-in">
+           <keep-alive>
+              <component v-bind:is="currentTab"></component>
+           </keep-alive>
+        </transition>
+
 
      </div>
   </div>
@@ -49,3 +52,12 @@ export default {
     },
 }
 </script>
+
+<style>
+   .component-fade-enter-active, .component-fade-leave-active {
+      transition: opacity .3s ease;
+   }
+   .component-fade-enter, .component-fade-leave-to  {
+      opacity: 0;
+   }
+</style>

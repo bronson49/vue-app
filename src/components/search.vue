@@ -1,7 +1,7 @@
 <template>
    <div class="tab-wrapper">
       <input type="text" :placeholder="placeholder" v-model="input" class="search-inp">
-      <button @click="startSearch" class="search-btn">Search</button>
+      <span @click="startSearch" class="search-btn">Search</span>
       <ul class="search-list" v-if="results.length">
          <li
             v-for="(item, index) in results"
@@ -50,7 +50,10 @@
         },
         computed:{
             filmList: function () {
-                return this.$store.state.watchList
+                const list = this.$store.state.watchList;
+                if (list && Array.isArray(list)){
+                    return list
+                }  else  return [];
             },
 
         },
