@@ -27,9 +27,26 @@
       color: #ea4f51;
       cursor: pointer;
       transition: .3s;
+      margin: 5px 0;
       &:hover{
         color: #ea1b17;
       }
+    }
+    .add{
+      font-size: 18px;
+      font-weight: 600;
+      color: #89ea97;
+      cursor: pointer;
+      transition: .3s;
+      margin: 5px 0;
+      &:hover{
+        color: #5aea5f;
+      }
+    }
+    .added{
+      font-size: 15px;
+      color: #aba6a7;
+      margin: 5px 0;
     }
   }
 }

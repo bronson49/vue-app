@@ -67,7 +67,6 @@
                 axios
                     .get(resUrl)
                     .then(response => {
-                        console.log(response.data);
                         this.results = response.data.results;
                     })
                     .catch(error => console.log(error));
