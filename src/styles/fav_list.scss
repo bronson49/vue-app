@@ -1,10 +1,10 @@
-.watch-list{
+.fav-list{
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   max-height: 600px;
   overflow: auto;
-  .watch-item{
+  .fav-item{
     width: 220px;
     height: 450px;
     margin-right: 10px;
@@ -14,11 +14,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       padding: 0 5px;
-    }
-    .priority{
-      font-size: 14px;
-      margin: 5px 0;
-      color: #a79c68;
     }
     .img{
       width: 100%;
@@ -55,13 +50,5 @@
       color: #aba6a7;
       margin: 5px 0;
     }
-  }
-}
-.watch-options{
-  cursor: pointer;
-  color: #a79c68;
-  transition: .3s;
-  &:hover{
-    color: #d8cd8b;
   }
 }

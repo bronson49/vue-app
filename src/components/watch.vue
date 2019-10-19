@@ -1,10 +1,15 @@
 <template>
       <div class="tab-wrapper">
-         <h1>watch component</h1>
-         <div class="watch-list" v-if="!(typeof filmList === 'string')">
-            <div class="watch-item" v-for="item in filmList" :key="item.id">
+         <h2>wish list</h2>
+         <div class="watch-options" @click="sortByPriority = !sortByPriority">
+            <p v-if="sortByPriority">Priority first</p>
+            <p v-else>In order of addition</p>
+         </div>
+         <div class="watch-list" v-if="filmList && filmList.length">
+            <div class="watch-item" v-for="item in sortedList" :key="item.id">
                <p class="title">{{item.title}}</p>
                <div class="img" :style="{backgroundImage :'url('+getImg(item.poster_path)+')'}"></div>
+               <p class="priority">Priority: {{item.priority}}</p>
                <p @click="deleteFromWatch(item.film_id)" class="delete">Удалить</p>
                <p
                      v-if="!isAdded(item.film_id)"
@@ -21,12 +26,21 @@
     export default {
         name: "watch",
         data(){
-            return{}
+            return{
+                sortByPriority: false,
+            }
         },
 
         computed:{
             filmList: function () {
                 return this.$store.state.watchList
+            },
+            sortedList: function(){
+                const filmList = this.filmList;
+                if (this.sortByPriority){
+                    return filmList.slice().sort((a, b)=> b.priority - a.priority)
+                } else return filmList
+
             },
             favList: function () {
                 return this.$store.state.favList
@@ -44,7 +58,7 @@
             deleteFromWatch(film_id){
                 let filmId = new FormData();
                 filmId.append('film_id', film_id);
-                axios.post('controller/deleteWatch.php', filmId).then(()=>{
+                axios.post('controller/watch/deleteWatch.php', filmId).then(()=>{
                     this.$store.dispatch('getToWatch');
                 });
             },

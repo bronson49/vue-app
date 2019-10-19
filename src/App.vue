@@ -32,7 +32,7 @@ export default {
     },
     beforeMount(){
         this.$store.dispatch('getToWatch');
-       // this.$store.dispatch('getFavorite');
+        this.$store.dispatch('getFavorite');
     },
   components: {
       appSidebar:sidebar,
