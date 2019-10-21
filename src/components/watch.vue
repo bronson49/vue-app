@@ -9,7 +9,18 @@
             <div class="watch-item" v-for="item in sortedList" :key="item.id">
                <p class="title">{{item.title}}</p>
                <div class="img" :style="{backgroundImage :'url('+getImg(item.poster_path)+')'}"></div>
-               <p class="priority">Priority: {{item.priority}}</p>
+               <div class="priority-wrapper"
+                     :class="{open : item.open}">
+                  <p class="priority"
+                     @click="showPriority(item)">
+                     Priority: {{item.priority}}</p>
+                  <div class="priority-change">
+                     <label>
+                        <input type="text" v-model="item.priorityNew">
+                     </label>
+                     <span @click="setPriority(item.film_id, item.priorityNew)">Change</span>
+                  </div>
+               </div>
                <p @click="deleteFromWatch(item.film_id)" class="delete">Удалить</p>
                <p
                      v-if="!isAdded(item.film_id)"
@@ -22,7 +33,8 @@
 </template>
 
 <script>
-   import axios from 'axios'
+    import Vue from 'vue'
+    import axios from 'axios'
     export default {
         name: "watch",
         data(){
@@ -68,6 +80,17 @@
                 filmOptions.append('title', item.title);
                 filmOptions.append('poster_path', item.poster_path);
                 this.$store.dispatch('addFavorite', filmOptions);
+            },
+            showPriority(item){
+                Vue.set(item, 'open', !item.open)
+            },
+            setPriority(id, value){
+                let filmOpt = new FormData();
+                filmOpt.append('film_id', id);
+                filmOpt.append('priority', value);
+                axios.post('controller/watch/setPriority.php', filmOpt).then(()=>{
+                    this.$store.dispatch('getToWatch');
+                });
             },
         },
     }

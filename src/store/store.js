@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state:{
-        test : 'my films',
+        test : 'title app',
         watchList:[],
         favList:[],
         activeTabIndex: 0,

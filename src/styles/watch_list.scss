@@ -19,6 +19,40 @@
       font-size: 14px;
       margin: 5px 0;
       color: #a79c68;
+      cursor: pointer;
+    }
+    .priority-change{
+      width: 0;
+      overflow: hidden;
+      transition: .3s;
+      display: flex;
+      margin-top: 3px;
+      input{
+        font-size: 14px;
+        padding: 2px 5px;
+        border-radius: 5px;
+        margin: 0 10px;
+        background: #000;
+        color: #fff;
+        border: none;
+        width: 40px;
+      }
+      span{
+        cursor: pointer;
+        font-size: 14px;
+        color: #a79c68;
+        &:hover{
+          color: #e1d28c;
+        }
+      }
+    }
+    .priority-wrapper{
+      display: flex;
+      &.open{
+        .priority-change{
+          width: 60%;
+        }
+      }
     }
     .img{
       width: 100%;
@@ -61,6 +95,7 @@
   cursor: pointer;
   color: #a79c68;
   transition: .3s;
+  padding: 0 20px;
   &:hover{
     color: #d8cd8b;
   }

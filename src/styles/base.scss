@@ -38,10 +38,14 @@ body {
 }
 .tab-wrapper{
   width: 100%;
+  h1 {
+    text-align: center;
+  }
+  h2{
+    padding: 0 20px;
+  }
 }
-.tab-wrapper h1 {
-  text-align: center;
-}
+
 
 
 
