@@ -1,8 +1,13 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', '', 'vue_film_app');
+error_reporting(E_ALL) ;
+//$mysqli = new mysqli('localhost', 'root', '', 'vue_film_app');
+$mysqli = new mysqli(
+    'bronson4.mysql.tools',
+    'bronson4_films',
+    '5Kv91t*K*c',
+    'bronson4_films');
+$mysqli->set_charset("utf8");
 if ($mysqli->connect_errno) {
-    echo "Извините, возникла проблема на сайте";
-    echo "Ошибка: Не удалась создать соединение с базой MySQL и вот почему: \n";
     echo "Номер ошибки: " . $mysqli->connect_errno . "\n";
     echo "Ошибка: " . $mysqli->connect_error . "\n";
     exit;
@@ -11,22 +16,20 @@ if ($mysqli->connect_errno) {
 $sql = "SELECT * FROM `towatch_list`";
 
 if (!$result = $mysqli->query($sql)) {
-    echo "Извините, возникла проблема в работе сайта.";
-    echo "Ошибка: Наш запрос не удался и вот почему: \n";
     echo "Запрос: " . $sql . "\n";
     echo "Номер ошибки: " . $mysqli->errno . "\n";
     echo "Ошибка: " . $mysqli->error . "\n";
     exit;
 }
 if ($result->num_rows === 0) {
-    echo "Мы не смогли найти совпадение для $aid, простите. Пожалуйста, попробуйте еще раз.";
+    echo "Нет совпадений.";
     exit;
 }
 
 
 $obj = [];
 
-while ($row = mysqli_fetch_assoc($result)){
+while ($row = $result->fetch_assoc()){
     $obj[] = $row;
 }
 echo json_encode($obj);

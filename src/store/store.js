@@ -46,6 +46,8 @@ const store = new Vuex.Store({
         getToWatch({commit}){
             axios.get('controller/watch/getWatch.php').then(response => {
                 commit('generateWatchList', response.data);
+                console.log('getToWatch');
+                console.log(response);
             }).catch(error => console.log(error));
         },
 
