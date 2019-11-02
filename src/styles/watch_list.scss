@@ -6,7 +6,6 @@
   overflow: auto;
   .watch-item{
     width: 220px;
-    height: 450px;
     margin-right: 10px;
     .title{
       height: 40px;
@@ -14,6 +13,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
       padding: 0 5px;
+      display: flex;
+      align-items: flex-end;
     }
     .priority{
       font-size: 14px;
@@ -88,6 +89,17 @@
       font-size: 15px;
       color: #aba6a7;
       margin: 5px 0;
+    }
+    .viewed{
+      cursor: pointer;
+      transition: .3s;
+      margin: 5px 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #dcd806;
+      &:hover{
+        color: #fcff08;
+      }
     }
   }
 }

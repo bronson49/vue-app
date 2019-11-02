@@ -9,6 +9,7 @@ const store = new Vuex.Store({
         test : 'title app',
         watchList:[],
         favList:[],
+        viewList:[],
         activeTabIndex: 0,
         rotateStep:15,
     },
@@ -25,6 +26,11 @@ const store = new Vuex.Store({
             if (Array.isArray(filmArr)){
                 state.favList = filmArr;
             } else  state.favList = [];
+        },
+        generateViewedList(state, filmArr){
+            if (Array.isArray(filmArr)){
+                state.viewList = filmArr;
+            } else  state.viewList = [];
         },
         rotateTabList(state, index){
             state.activeTabIndex = index;
@@ -46,8 +52,6 @@ const store = new Vuex.Store({
         getToWatch({commit}){
             axios.get('controller/watch/getWatch.php').then(response => {
                 commit('generateWatchList', response.data);
-                console.log('getToWatch');
-                console.log(response);
             }).catch(error => console.log(error));
         },
 
@@ -67,6 +71,24 @@ const store = new Vuex.Store({
             axios.get('controller/fav/getFav.php').then(response => {
                 commit('generateFavList', response.data);
             }).catch(error => console.log(error));
+        },
+
+        getViewed({commit}){
+            axios.get('controller/viewed/getViewed.php').then(response => {
+                commit('generateViewedList', response.data);
+            }).catch(error => console.log(error));
+        },
+        addViewed ({dispatch}, filmOpt){
+            axios({
+                method: 'POST',
+                url: 'controller/viewed/addViewed.php',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: filmOpt
+            })
+                .then(() => {
+                    dispatch('getViewed');
+                })
+                .catch(error => console.log(error));
         },
     }
 });

@@ -21,11 +21,13 @@
                      <span @click="setPriority(item.film_id, item.priorityNew)">Change</span>
                   </div>
                </div>
-               <p @click="deleteFromWatch(item.film_id)" class="delete">Удалить</p>
+               <p @click="deleteFromWatch(item.film_id)" class="delete">Delete</p>
+               <p @click="addToViewed(item)" class="viewed">Viewed</p>
                <p
                      v-if="!isAdded(item.film_id)"
                      @click="addToFav(item)" class="add" > Add To Favorite </p>
                <p v-else class="added"> Also in Favorite </p>
+
             </div>
          </div>
          <h2 v-else>Список пока пустой</h2>
@@ -75,7 +77,7 @@
                 });
             },
             addToFav(item){
-                const filmOptions = new FormData();
+                let filmOptions = new FormData();
                 filmOptions.append('film_id', item.film_id);
                 filmOptions.append('title', item.title);
                 filmOptions.append('poster_path', item.poster_path);
@@ -89,6 +91,20 @@
                 filmOpt.append('film_id', id);
                 filmOpt.append('priority', value);
                 axios.post('controller/watch/setPriority.php', filmOpt).then(()=>{
+                    this.$store.dispatch('getToWatch');
+                });
+            },
+
+            addToViewed(item){
+                let filmOptions = new FormData();
+                filmOptions.append('film_id', item.film_id);
+                filmOptions.append('title', item.title);
+                filmOptions.append('poster_path', item.poster_path);
+                this.$store.dispatch('addViewed', filmOptions).then(()=>{
+                    let filmId = new FormData();
+                    filmId.append('film_id', item.film_id);
+                    return axios.post('controller/watch/deleteWatch.php', filmId)
+                }).then(()=>{
                     this.$store.dispatch('getToWatch');
                 });
             },
