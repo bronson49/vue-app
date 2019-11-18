@@ -75,3 +75,24 @@
 .search-list .main-info{
   width: 100%;
 }
+.pagination{
+  display: flex;
+  flex-wrap: wrap;
+  span{
+    padding: 5px;
+    cursor: pointer;
+    margin: 1px 5px;
+    width: 30px;
+    text-align: center;
+    transition: .3s;
+    border: 1px solid silver;
+    background: transparent;
+    &:hover, &.active{
+      color: #efe3e7;
+      background: #898989;
+    }
+  }
+  .prev-page{
+    
+  }
+}
